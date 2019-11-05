@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EX2 Tabs</title>
+</head>
+<body>
+<tab-panel>
+    <div data-tabname="one">Tab one</div>
+    <div data-tabname="two">Tab two</div>
+    <div data-tabname="three">Tab three</div>
+</tab-panel>
+
+<script>
+    'use strict';
+
+    function asTabs(node) {
+        const tabs = node.querySelectorAll("div");
+        const div = document.createElement("div");
+        const buttons = [];
+
+        tabs.forEach(function(tab, i) {
+            const button = document.createElement("button");
+            buttons.push(button);
+            button.textContent = tabs[i].innerText;
+            button.addEventListener("click", function() {
+                selectTab(i);
+            });
+            div.appendChild(button);
+            node.appendChild(div);
+        });
+
+        function selectTab(n) {
+            tabs.forEach(function(tab, i) {
+                if (i == n) {
+                    tab.style.display = "";
+                    buttons[i].style.background = "red";
+                } else {
+                    buttons[i].style.background = "";
+                    tab.style.display = "none";
+                }
+            });
+        }
+        selectTab(0);
+    }
+    asTabs(document.querySelector("tab-panel"));
+</script>
+</body>
+</html>
